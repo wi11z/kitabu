@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// The home is where all ledger for the day will be displayed 
+// If the user is not authenticated he or she will redirected to login form
+
+Route::get('/', 'LedgerController@all_ledgers');
 
 Auth::routes();
 

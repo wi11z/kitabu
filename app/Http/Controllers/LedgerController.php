@@ -8,13 +8,21 @@ use App\UpdatedLedger;
 
 class LedgerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // show a create ledger form
-    public function create_form(){
-        return view();
+    public function create_form()
+    {
+        return view('');
     }
 
     // create ledger item
-    public function create_ledger(Request $request){
+    public function create_ledger(Request $request)
+    {
 
         $this->validate($request, [
             'particular' => 'required',
@@ -30,28 +38,32 @@ class LedgerController extends Controller
     }
 
     // show all available ledger items
-    public function all_ledgers(){
+    public function all_ledgers()
+    {
 
         $ledgers = Ledger::all();
         return view('', [ 'ledgers' => $ledgers]);
     }
 
     // show one ledger item
-    public function view_ledger($id){
+    public function view_ledger($id)
+    {
 
         $ledger = Ledger::find($id);
         return view('', [ 'ledger' => $ledger]);
     }
 
     //show update ledger table
-    public function edit_ledger($id){
+    public function edit_ledger($id)
+    {
 
         $ledger = Ledger::find($id);
         return view('', [ 'ledger' => $ledger]);
     }
 
     // update ledger item
-    public function update_ledger(Request $request, $id){
+    public function update_ledger(Request $request, $id)
+    {
 
         $ledger = Ledger::find('id');
 
@@ -74,11 +86,16 @@ class LedgerController extends Controller
         $ledger->amount = $request->input('amount');
         $ledger->type = $request->input('type');
         $ledger->save();
+
+        return view('')->with('success', 'ledger item was successfully created');
     }
 
     // delete ledger item
-    public function delete_ledger($id){
+    public function delete_ledger($id)
+    {
         $ledger = Ledger::find($id);
         $ledger->delete();
+
+        return view('')->with('success', 'ledger item was successfully created');
     }
 }
