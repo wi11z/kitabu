@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <h3 class="text-center">CASH FLOW ENTITY</h3>
             <div class="d-flex flex-row-reverse">
-                <a class="btn btn-primary p-2" href="#" role="button">Add Particular +</a>
+                <button onclick="showform()" class="btn btn-primary p-2" role="button">Add Particular +</button>
             </div>
             {{-- Debit Amount --}}
             <div class="table-responsive">
