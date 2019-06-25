@@ -15,7 +15,8 @@
 // If the user is not authenticated he or she will redirected to login form
 
 Route::get('/', 'LedgerController@all_ledgers');
+// Route::get('/home', 'LedgerController@')
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

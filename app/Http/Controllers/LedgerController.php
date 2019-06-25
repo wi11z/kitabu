@@ -40,15 +40,14 @@ class LedgerController extends Controller
     // show all available ledger items
     public function all_ledgers()
     {
-
-        $ledgers = Ledger::all();
-        return view('', [ 'ledgers' => $ledgers]);
+        // $ledgers = Ledger::orderBy('created_at', 'desc')->get();
+        // return view('workspace', [ 'ledgers' => $ledgers]);
+        return view('workspace');
     }
 
     // show one ledger item
     public function view_ledger($id)
     {
-
         $ledger = Ledger::find($id);
         return view('', [ 'ledger' => $ledger]);
     }

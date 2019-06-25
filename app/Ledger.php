@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Legder extends Model
+class Ledger extends Model
 {
     use SoftDeletes;
 
-      /**
-     * The attribute that is mass assignable.
-     *
-     * @var array
-     */
+      
     protected $fillable = 'amount';
+    protected $table = 'ledgers';
+
 
 
 
