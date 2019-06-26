@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <h3 class="text-center">CASH FLOW ENTITY</h3>
             <div class="d-flex flex-row-reverse">
-                <button onclick="showform()" class="btn btn-primary p-2" role="button">Add Particular +</button>
+            <a href="/add_particular" class="btn btn-primary p-2" role="button">Add Particular +</a>
             </div>
             {{-- Debit Amount --}}
             <div class="table-responsive">
@@ -25,41 +25,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
-                                <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>
-                                <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>
-                                <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
-                            </td>
-                          </tr>
+                          
+                            @foreach($debit_ledgers as $debit_ledger)
+                            <tr>
+                                <th scope="row">{{ $debit_ledger->id}}</th>
+                                <td>{{ $debit_ledger->particular}}</td>
+                                <td>{{ number_format($debit_ledger->amount, 2, ".", ",")}}</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach
                           <tr>
                             <th scope="row"></th>
-                            <td>
+                            <td >
                                 <b>
                                     Total
                                 </b> 
-                                </td>
-                            <td>5000000</td>
+                            </td>
+                            <td>{{ number_format($debit_total, 2, ".", ",")}}</td>
                         </tr>
                         </tbody>
                       </table>
@@ -83,41 +68,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>
-                                    <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>
+
+                           @foreach($credit_ledgers as $credit_ledger)     
+                                <tr>
+                                    <th scope="row">{{$credit_ledger->id}}</th>
+                                    <td>{{$credit_ledger->particular}}</td>
+                                    <td>{{number_format($credit_ledger->amount, 2, ".", ",")}}</td>
+                                    <td>
                                         <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
                                         <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>
-                                        <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
-                                        <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            @endforeach
                             <tr>
                                     <th scope="row"></th>
-                                    <td>
-                                        <b>
-                                            Total
-                                        </b> 
-                                        </td>
-                                    <td>500000</td>
+                                    <td><b>Total</b> </td>
+                                    <td>{{number_format($credit_total, 2, ".", ",")}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -138,17 +104,17 @@
                                 <tr>
                                 <th scope="row">Debit total</th>
                                 <td></td>
-                                <td>5000000</td>
+                                <td class="d-flex flex-row-reverse">{{number_format($debit_total, 2, ".", ",")}}</td>
                                 </tr>
                                 <tr>
                                 <th scope="row">Credit total</th>
                                 <td></td>
-                                <td>500000</td>
+                                <td class="d-flex flex-row-reverse">{{number_format($credit_total, 2, ".", ",")}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Net total</th>
                                     <td></td>
-                                    <td>4500000</td>
+                                    <td class="d-flex flex-row-reverse">{{$net_total}}</td>
                                     </tr>
                             </tbody>
                         </table>

@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Ledger;
 use App\UpdatedLedger;
 
 class LedgerController extends Controller
 {
 
+
+    public function setTime()
+    {
+        $time = \Carbon\Carbon::now();
+        // $time->timezone = new DateTimeZone('Africa/Nairobi');
+        return $time->now();
+    }
+
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    // show a create ledger form
-    public function create_form()
-    {
-        return view('');
     }
 
     // create ledger item
@@ -26,23 +29,41 @@ class LedgerController extends Controller
 
         $this->validate($request, [
             'particular' => 'required',
-            'amount' => 'required|number',
+            'amount' => 'required|numeric',
             'type' => 'required',
         ]);
 
-        $ledger = new Ledger;
-        $ledger->particular = $request->input('particular');
-        $ledger->amount = $request->input('amount');
-        $ledger->type = $request->input('type');
-        $ledger->save();
+        DB::table('ledgers')->insert([
+            'particular' => $request->input('particular'),
+            'amount' => $request->input('amount'),
+            'type' => $request->input('type'),
+            'created_at' =>  \Carbon\Carbon::now()
+        ]);
+
+        return redirect('/');
     }
 
     // show all available ledger items
     public function all_ledgers()
     {
-        // $ledgers = Ledger::orderBy('created_at', 'desc')->get();
-        // return view('workspace', [ 'ledgers' => $ledgers]);
-        return view('workspace');
+        // debit mechanism
+        $debit_ledgers = DB::table('ledgers')->where('type', 'debit')->get();
+        $debit_total = DB::table('ledgers')->where('type', 'debit')->sum('amount');
+
+        // credit mechanism
+        $credit_ledgers = DB::table('ledgers')->where('type', 'credit')->get();
+        $credit_total = DB::table('ledgers')->where('type', 'credit')->sum('amount');
+
+        // Net total calculation
+        $net_total = number_format(($debit_total - $credit_total), 2, ".", ",");
+
+        return view('workspace', [
+            'debit_ledgers' => $debit_ledgers,
+            'credit_ledgers' => $credit_ledgers,
+            'debit_total' => $debit_total,
+            'credit_total' => $credit_total,
+            'net_total' => $net_total,
+            ]);
     }
 
     // show one ledger item
@@ -68,7 +89,7 @@ class LedgerController extends Controller
 
         $this->validate($request, [
             'particular' => 'required',
-            'amount' => 'required|number',
+            'amount' => 'required|numeric',
             'type' => 'required',
         ]);
 

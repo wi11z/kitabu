@@ -9,8 +9,7 @@
                         Add New Particular
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/add_particular">
-                        @csrf
+                    <form method="" action="">
                         <div class="form-group">
                             <label for="particular">Particular</label>
                             <input type="text" name="particular" class="form-control" id="particular" placeholder="Particular">

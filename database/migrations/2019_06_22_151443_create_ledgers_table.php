@@ -16,7 +16,7 @@ class CreateLedgersTable extends Migration
         Schema::create('ledgers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('particular')->default('Particulars');
-            $table->decimal('amount', 8, 2);
+            $table->decimal('amount', 20, 2);
             $table->string('type'); // credit or debit
             $table->timestamps();
             $table->softDeletes();

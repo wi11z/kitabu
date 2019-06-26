@@ -10,8 +10,11 @@ class Ledger extends Model
 {
     use SoftDeletes;
 
-      
-    protected $fillable = 'amount';
+    
+    public $primaryKey = 'id';
+
+    public $timestamps = true;
+    
     protected $table = 'ledgers';
 
 
