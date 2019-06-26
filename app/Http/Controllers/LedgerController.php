@@ -47,11 +47,11 @@ class LedgerController extends Controller
     public function all_ledgers()
     {
         // debit mechanism
-        $debit_ledgers = DB::table('ledgers')->where('type', 'debit')->get();
+        $debit_ledgers = DB::table('ledgers')->where('type', 'debit')->orderBy('created_at', 'desc')->get();
         $debit_total = DB::table('ledgers')->where('type', 'debit')->sum('amount');
 
         // credit mechanism
-        $credit_ledgers = DB::table('ledgers')->where('type', 'credit')->get();
+        $credit_ledgers = DB::table('ledgers')->where('type', 'credit')->orderBy('created_at', 'desc')->get();
         $credit_total = DB::table('ledgers')->where('type', 'credit')->sum('amount');
 
         // Net total calculation
