@@ -28,7 +28,7 @@
                           
                             @foreach($debit_ledgers as $debit_ledger)
                             <tr>
-                                <td>{{ $debit_ledger->created_at}}</td>
+                                <th scope="row">{{ $debit_ledger->created_at}}</th>
                                 <td>{{ $debit_ledger->particular}}</td>
                                 <td>{{ number_format($debit_ledger->amount, 2, ".", ",")}}</td>
                                 <td>
@@ -71,7 +71,7 @@
 
                            @foreach($credit_ledgers as $credit_ledger)     
                                 <tr>
-                                    <td>{{$credit_ledger->created_at}}</td>
+                                    <th scope="row">{{$credit_ledger->created_at}}</th>
                                     <td>{{$credit_ledger->particular}}</td>
                                     <td>{{number_format($credit_ledger->amount, 2, ".", ",")}}</td>
                                     <td>
