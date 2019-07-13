@@ -6,17 +6,19 @@
         <div class="col-md-8">
             <div class="card border-primary">
                 <div class="card-header text-center" style="background-color:DodgerBlue; color:aliceblue">
-                        Add New Particular
+                        Edit Particular
                 </div>
                 <div class="card-body">
-                    <form method="" action="">
+                <form method="POST" action="/edit_particular/{{$ledger->id}}">
+                    @csrf
+                    <input name="_method" type="hidden" value="PUT">
                         <div class="form-group">
                             <label for="particular">Particular</label>
-                            <input type="text" name="particular" class="form-control" id="particular" placeholder="Particular">
+                        <input type="text" name="particular" class="form-control" id="particular" value="{{ $ledger->particular}}">
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount</label>
-                            <input type="number" name="amount" class="form-control" id="amount" placeholder="Amount">
+                            <input type="number" name="amount" class="form-control" id="amount" value="{{ $ledger->amount}}">
                         </div>
                         <div class="form-group">
                             <input type="radio" name="type" value="debit"> Debit &nbsp;

@@ -78,7 +78,7 @@ class LedgerController extends Controller
     {
 
         $ledger = Ledger::find($id);
-        return view('', [ 'ledger' => $ledger]);
+        return view('intenals.edit', [ 'ledger' => $ledger]);
     }
 
     // update ledger item
@@ -107,7 +107,7 @@ class LedgerController extends Controller
         $ledger->type = $request->input('type');
         $ledger->save();
 
-        return view('')->with('success', 'ledger item was successfully created');
+        return view('/')->with('success', 'ledger item was successfully created');
     }
 
     // delete ledger item
