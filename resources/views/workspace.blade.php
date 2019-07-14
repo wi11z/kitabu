@@ -15,7 +15,7 @@
                             <tr class="text-center"> 
                               <b>
                                   DEBIT
-                                </b>  
+                              </b>  
                             </tr>
                             <tr>
                                 <th scope="col">Date</th>
@@ -75,7 +75,7 @@
                                     <td>{{$credit_ledger->particular}}</td>
                                     <td>{{number_format($credit_ledger->amount, 2, ".", ",")}}</td>
                                     <td>
-                                        <a class="btn btn-success btn-sm" href="#" role="button">Edit</a>
+                                        <a class="btn btn-success btn-sm" href="/edit_particular/{{$credit_ledger->id}}" role="button">Edit</a>
                                         <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
                                     </td>
                                 </tr>

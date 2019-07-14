@@ -85,7 +85,7 @@ class LedgerController extends Controller
     public function update_ledger(Request $request, $id)
     {
 
-        $ledger = Ledger::find('id');
+        $ledger = DB::table('ledgers')->where('id', $id)->first();
 
         $this->validate($request, [
             'particular' => 'required',
@@ -94,20 +94,25 @@ class LedgerController extends Controller
         ]);
 
         // store the previous ledger item
-        $updated_ledger = new UpdatedLedger;
-        $updated_ledger->ledger_id = $ledger->id;
-        $updated_ledger->previous_particular = $ledger->particular;
-        $updated_ledger->previous_amount = $ledger->amount;
-        $updated_ledger->previous_type = $ledger->type;
-        $updated_ledger->save();
+        DB::table('updated_ledgers')->insert([
+            'ledger_id' => $ledger->id,
+            'previous_particular' => $ledger->particular,
+            'previous_amount' => $ledger->amount,
+            'previous_type' => $ledger->type,
+            'created_at' =>  $ledger->created_at,
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
 
         // store the updates
-        $ledger->particular = $request->input('particular');
-        $ledger->amount = $request->input('amount');
-        $ledger->type = $request->input('type');
-        $ledger->save();
+        DB::table('ledgers')->where('id', $ledger->id)->update([
+            'particular' => $request->input('particular'),
+            'amount' => $request->input('amount'),
+            'type' => $request->input('type'),
+            'updated_at' =>  \Carbon\Carbon::now()
+        ]);
 
-        return view('/')->with('success', 'ledger item was successfully created');
+
+        return redirect('/')->with('success', 'ledger item was successfully updated');
     }
 
     // delete ledger item
@@ -116,6 +121,6 @@ class LedgerController extends Controller
         $ledger = Ledger::find($id);
         $ledger->delete();
 
-        return view('')->with('success', 'ledger item was successfully created');
+        return redirect('/')->with('success', 'ledger item was successfully deleted');
     }
 }

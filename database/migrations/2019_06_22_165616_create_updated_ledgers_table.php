@@ -17,7 +17,7 @@ class CreateUpdatedLedgersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ledger_id');
             $table->string('previous_particular');
-            $table->decimal('previous_amount', 8, 2);
+            $table->decimal('previous_amount', 20, 2);
             $table->string('previous_type');
             $table->foreign('ledger_id')->references('id')->on('ledgers');
             $table->timestamps();

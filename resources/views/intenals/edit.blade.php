@@ -20,10 +20,18 @@
                             <label for="amount">Amount</label>
                             <input type="number" name="amount" class="form-control" id="amount" value="{{ $ledger->amount}}">
                         </div>
-                        <div class="form-group">
-                            <input type="radio" name="type" value="debit"> Debit &nbsp;
-                            <input type="radio" name="type" value="credit"> Credit
-                        </div> <br> <br>
+                        @if($ledger->type == "debit")
+                            <div class="form-group">
+                                <input type="radio" name="type" value="debit" checked="checked"> Debit &nbsp;
+                                <input type="radio" name="type" value="credit"> Credit  
+                            </div>
+                        @else
+                            <div class="form-group">
+                                <input type="radio" name="type" value="debit"> Debit &nbsp;
+                                <input type="radio" name="type" value="credit" checked="checked"> Credit  
+                            </div>
+                        @endif
+                             <br> <br>
                         <div class="d-flex flex-row-reverse">
                             <button type="submit" class="btn btn-primary ">Submit</button>
                         </div>
