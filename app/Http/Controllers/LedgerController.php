@@ -118,8 +118,8 @@ class LedgerController extends Controller
     // delete ledger item
     public function delete_ledger($id)
     {
-        $ledger = Ledger::find($id);
-        $ledger->delete();
+        $ledger = DB::table('ledgers')->where('id', $id)->delete();
+        // $ledger->delete();
 
         return redirect('/')->with('success', 'ledger item was successfully deleted');
     }

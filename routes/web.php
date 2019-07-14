@@ -22,3 +22,6 @@ Route::post('/add_particular', 'LedgerController@create_ledger');
 // Route for editing a particular
 Route::get('/edit_particular/{id}', 'LedgerController@edit_ledger');
 Route::put('/edit_particular/{id}', 'LedgerController@update_ledger');
+
+// Route for deleting a particular
+Route::delete('/delete_particular/{id}', 'LedgerController@delete_ledger');

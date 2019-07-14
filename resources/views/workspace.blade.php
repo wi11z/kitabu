@@ -9,7 +9,7 @@
             <a href="/add_particular" class="btn btn-primary p-2" role="button">Add Particular +</a>
             </div>
             {{-- Debit Amount --}}
-            <div class="table-responsive">
+            <div class="">
                 <table class="table table-secondary">
                         <thead class="thead-light">
                             <tr class="text-center"> 
@@ -32,8 +32,19 @@
                                 <td>{{ $debit_ledger->particular}}</td>
                                 <td>{{ number_format($debit_ledger->amount, 2, ".", ",")}}</td>
                                 <td>
-                                <a class="btn btn-success btn-sm" href="/edit_particular/{{$debit_ledger->id}}" role="button">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a class="btn btn-success btn-sm" href="/edit_particular/{{$debit_ledger->id}}" role="button">Edit</a> 
+                                        </div>
+                                        <div class="col-sm">
+                                            <form action="/delete_particular/{{$debit_ledger->id}}" method="POST">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>     
                                 </td>
                             </tr>
                             @endforeach
@@ -52,7 +63,7 @@
                       
                     {{-- Credit Amount --}}
                     &nbsp;
-                    <div class="table-responsive">
+                    <div class="">
                         <table class="table table-secondary">
                             <thead class="thead-light">
                                 <tr class="text-center"> 
@@ -75,8 +86,19 @@
                                     <td>{{$credit_ledger->particular}}</td>
                                     <td>{{number_format($credit_ledger->amount, 2, ".", ",")}}</td>
                                     <td>
-                                        <a class="btn btn-success btn-sm" href="/edit_particular/{{$credit_ledger->id}}" role="button">Edit</a>
-                                        <a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
+                                        <div class="row">
+                                                <div class="col-sm">
+                                                    <a class="btn btn-success btn-sm" href="/edit_particular/{{$credit_ledger->id}}" role="button">Edit</a> 
+                                                </div>
+                                                <div class="col-sm">
+                                                    <form action="/delete_particular/{{$credit_ledger->id}}" method="POST">
+                                                        @csrf
+                                                        <input name="_method" type="hidden" value="DELETE">
+                                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </div>
+                                                
+                                            </div> 
                                     </td>
                                 </tr>
                             @endforeach
