@@ -10,14 +10,6 @@ use App\UpdatedLedger;
 class LedgerController extends Controller
 {
 
-
-    public function setTime()
-    {
-        $time = \Carbon\Carbon::now();
-        // $time->timezone = new DateTimeZone('Africa/Nairobi');
-        return $time->now();
-    }
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -64,13 +56,6 @@ class LedgerController extends Controller
             'credit_total' => $credit_total,
             'net_total' => $net_total,
             ]);
-    }
-
-    // show one ledger item
-    public function view_ledger($id)
-    {
-        $ledger = Ledger::find($id);
-        return view('', [ 'ledger' => $ledger]);
     }
 
     //show update ledger table
