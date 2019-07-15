@@ -45,7 +45,7 @@
                     <div class="">
                         <table class="table table-secondary">
                             <thead class="thead-light">
-                                <tr class="text-center"> 
+                                <tr class="text-center table-danger"> 
                                     <b>
                                         DLELETED PARTICULARS
                                     </b>  

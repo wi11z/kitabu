@@ -3,13 +3,7 @@
 
 Auth::routes();
 
-// Route to the home page of the tracking system
-// User must be authenticated
-
-// Route::get('/', function (){
-//         return view('workspace');
-// })->middleware('auth');
-
+// Home
 Route::get('/', 'LedgerController@all_ledgers');
 
 
