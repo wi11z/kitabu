@@ -61,7 +61,6 @@ class LedgerController extends Controller
     //show update ledger table
     public function edit_ledger($id)
     {
-
         $ledger = Ledger::find($id);
         return view('intenals.edit', [ 'ledger' => $ledger]);
     }
@@ -103,8 +102,22 @@ class LedgerController extends Controller
     // delete ledger item
     public function delete_ledger($id)
     {
-        $ledger = DB::table('ledgers')->where('id', $id)->delete();
-        // $ledger->delete();
+        $ledger = DB::table('ledgers')->where('id', $id)->first();
+        DB::table('deletes')->insert([
+            'ledger_id' => $id,
+            'particular' => $ledger->particular,
+            'amount' => $ledger->amount,
+            'type' => $ledger->type,
+            'created_at' =>  $ledger->created_at,
+            'updated_at' => $ledger->updated_at,
+            'deleted_at' => \Carbon\Carbon::now()
+        ]);
+
+        if($ledger->updated_at != NULL){
+            DB::table('updated_ledgers')->where('ledger_id', $ledger->id)->delete();
+        }
+
+        DB::table('ledgers')->where('id', $id)->delete();
 
         return redirect('/')->with('success', 'ledger item was successfully deleted');
     }

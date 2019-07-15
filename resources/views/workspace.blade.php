@@ -28,7 +28,11 @@
                           
                             @foreach($debit_ledgers as $debit_ledger)
                             <tr>
-                                <th scope="row">{{ $debit_ledger->created_at}}</th>
+                                @if($debit_ledger->updated_at == NULL)
+                                    <th scope="row">{{ $debit_ledger->created_at}}</th>
+                                @else
+                                    <th scope="row">{{ $debit_ledger->updated_at}}</th>
+                                @endif
                                 <td>{{ $debit_ledger->particular}}</td>
                                 <td>{{ number_format($debit_ledger->amount, 2, ".", ",")}}</td>
                                 <td>
@@ -82,7 +86,11 @@
 
                            @foreach($credit_ledgers as $credit_ledger)     
                                 <tr>
-                                    <th scope="row">{{$credit_ledger->created_at}}</th>
+                                    @if($credit_ledger->updated_at == NULL)
+                                        <th scope="row">{{$credit_ledger->created_at}}</th>
+                                    @else
+                                        <th scope="row">{{$credit_ledger->updated_at}}</th>
+                                    @endif
                                     <td>{{$credit_ledger->particular}}</td>
                                     <td>{{number_format($credit_ledger->amount, 2, ".", ",")}}</td>
                                     <td>
