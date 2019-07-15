@@ -121,4 +121,15 @@ class LedgerController extends Controller
 
         return redirect('/')->with('success', 'ledger item was successfully deleted');
     }
+
+    public function overall_report(){
+
+        $updated_ledgers = DB::table('updated_ledgers')->orderBy('updated_at', 'desc')->get();
+        $deleted_ledgers = DB::table('deletes')->orderBy('deleted_at', 'desc')->get();
+
+        return view('reports.updated_deleted', [
+            'updated_ledgers' => $updated_ledgers,
+            'deleted_ledgers' => $deleted_ledgers
+        ]);
+    }
 }

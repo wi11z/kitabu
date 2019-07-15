@@ -25,3 +25,6 @@ Route::put('/edit_particular/{id}', 'LedgerController@update_ledger');
 
 // Route for deleting a particular
 Route::delete('/delete_particular/{id}', 'LedgerController@delete_ledger');
+
+// Route for viewing reports
+Route::get('/overall_reports', 'LedgerController@overall_report')->name('reports');
