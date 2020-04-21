@@ -145,7 +145,7 @@ class LedgerController extends Controller
 
         $time = 0;
         ini_set('max_execution_time', $time);
-        $pdf = \PDF::loadView('reports.updated_deleted', [
+        $pdf = \PDF::loadView('reports.pdf_report', [
             'updated_ledgers' => $updated_ledgers,
             'deleted_ledgers' => $deleted_ledgers
         ]);
