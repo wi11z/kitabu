@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h3 class="text-center">OVERALL REPORT</h3>
-            {{-- <div class="d-flex flex-row-reverse">
-            <a href="/add_particular" class="btn btn-primary p-2" role="button">Add Particular +</a>
-            </div> --}}
+            <div class="d-flex flex-row-reverse">
+            <a href="{{ route('download.report')}}" class="btn btn-primary p-2" role="button">Download Report</a>
+            </div>
             {{-- Updates Reports --}}
             <div class="">
                 <table class="table table-secondary">

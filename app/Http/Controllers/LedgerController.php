@@ -132,4 +132,24 @@ class LedgerController extends Controller
             'deleted_ledgers' => $deleted_ledgers
         ]);
     }
+
+    public function downloadReport(){
+
+        // $report_view = $this->overall_report();
+
+        // $pdf = \PDF::loadView($report_view);
+        // return $pdf->download('report.pdf');
+
+        $updated_ledgers = DB::table('updated_ledgers')->orderBy('updated_at', 'desc')->get();
+        $deleted_ledgers = DB::table('deletes')->orderBy('deleted_at', 'desc')->get();
+
+        $time = 0;
+        ini_set('max_execution_time', $time);
+        $pdf = \PDF::loadView('reports.updated_deleted', [
+            'updated_ledgers' => $updated_ledgers,
+            'deleted_ledgers' => $deleted_ledgers
+        ]);
+        return $pdf->stream('report.pdf');
+
+    }
 }

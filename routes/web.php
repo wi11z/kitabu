@@ -22,3 +22,4 @@ Route::delete('/delete_particular/{id}', 'LedgerController@delete_ledger');
 
 // Route for viewing reports
 Route::get('/overall_reports', 'LedgerController@overall_report')->name('reports');
+Route::get('/download_report', 'LedgerController@downloadReport')->name('download.report');
