@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Ledger;
 use App\UpdatedLedger;
+use \Carbon\Carbon;
 
 class LedgerController extends Controller
 {
@@ -122,6 +123,7 @@ class LedgerController extends Controller
         return redirect('/')->with('success', 'ledger item was successfully deleted');
     }
 
+    
     public function overall_report(){
 
         $updated_ledgers = DB::table('updated_ledgers')->orderBy('updated_at', 'desc')->get();
@@ -135,11 +137,7 @@ class LedgerController extends Controller
 
     public function downloadReport(){
 
-        // $report_view = $this->overall_report();
-
-        // $pdf = \PDF::loadView($report_view);
-        // return $pdf->download('report.pdf');
-
+        $generatedTime = \Carbon\Carbon::now();
         $updated_ledgers = DB::table('updated_ledgers')->orderBy('updated_at', 'desc')->get();
         $deleted_ledgers = DB::table('deletes')->orderBy('deleted_at', 'desc')->get();
 
@@ -149,7 +147,7 @@ class LedgerController extends Controller
             'updated_ledgers' => $updated_ledgers,
             'deleted_ledgers' => $deleted_ledgers
         ]);
-        return $pdf->stream('report.pdf');
+        return $pdf->save('../public/storage/reports/'.$generatedTime.'-report.pdf')->stream('report.pdf');
 
     }
 }
